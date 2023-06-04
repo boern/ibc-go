@@ -334,6 +334,7 @@ func (cs *ClientState) VerifyPacketAcknowledgement(
 		return err
 	}
 
+	fmt.Println("sigData:", sigData)
 	if err := VerifySignature(publicKey, signBz, sigData); err != nil {
 		return err
 	}

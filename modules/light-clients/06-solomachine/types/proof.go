@@ -12,6 +12,7 @@ import (
 	channeltypes "github.com/cosmos/ibc-go/v4/modules/core/04-channel/types"
 	commitmenttypes "github.com/cosmos/ibc-go/v4/modules/core/23-commitment/types"
 	"github.com/cosmos/ibc-go/v4/modules/core/exported"
+	"fmt"
 )
 
 // VerifySignature verifies if the the provided public key generated the signature
@@ -365,6 +366,11 @@ func PacketAcknowledgementSignBytes(
 		DataType:    PACKETACKNOWLEDGEMENT,
 		Data:        dataBz,
 	}
+	fmt.Println("sequence", sequence)
+	fmt.Println("timestamp", timestamp)
+	fmt.Println("diversifier", diversifier)
+	fmt.Println("PACKETACKNOWLEDGEMENT", PACKETACKNOWLEDGEMENT)
+	fmt.Println("dataBz", dataBz)
 
 	return cdc.Marshal(signBytes)
 }
