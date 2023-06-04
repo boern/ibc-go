@@ -387,6 +387,8 @@ func PacketAcknowledgementDataBytes(
 		Acknowledgement: acknowledgement,
 	}
 
+	fmt.Println("path:", path.String())
+	fmt.Println("ack:", acknowledgement)
 	dataBz, err := cdc.Marshal(data)
 	if err != nil {
 		return nil, err
