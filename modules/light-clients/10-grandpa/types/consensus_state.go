@@ -34,20 +34,17 @@ func (cs ConsensusState) GetRoot() exported.Root {
 
 }
 
-// GetTimestamp returns block time in nanoseconds of the header that created consensus state
+// GetTimestamp returns block time in milliseconds of the header that created consensus state
 func (cs ConsensusState) GetTimestamp() uint64 {
 
 	return uint64(cs.Timestamp.UnixMilli())
 
 }
 
-// ValidateBasic defines a basic validation for the tendermint consensus state.
+// ValidateBasic defines a basic validation for the grandpa consensus state.
 // NOTE: ProcessedTimestamp may be zero if this is an initial consensus state passed in by relayer
 // as opposed to a consensus state constructed by the chain.
 func (cs ConsensusState) ValidateBasic() error {
-	// if cs.Root.Empty() {
-	// 	return sdkerrors.Wrap(clienttypes.ErrInvalidConsensus, "root cannot be empty")
-	// }
 	if len(cs.Root) == 0 {
 		return sdkerrors.Wrap(clienttypes.ErrInvalidConsensus, "root cannot be empty")
 	}

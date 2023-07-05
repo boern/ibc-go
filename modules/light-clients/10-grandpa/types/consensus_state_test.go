@@ -5,13 +5,13 @@ import (
 
 	commitmenttypes "github.com/cosmos/ibc-go/v6/modules/core/23-commitment/types"
 	"github.com/cosmos/ibc-go/v6/modules/core/exported"
-	ibcgptypes "github.com/cosmos/ibc-go/v6/modules/light-clients/10-grandpa/types"
+	"github.com/cosmos/ibc-go/v6/modules/light-clients/10-grandpa/types"
 )
 
 func (suite *GrandpaTestSuite) TestConsensusStateValidateBasic() {
 	testCases := []struct {
 		msg            string
-		consensusState *ibcgptypes.ConsensusState
+		consensusState *types.ConsensusState
 		expectPass     bool
 	}{
 		{
@@ -22,7 +22,7 @@ func (suite *GrandpaTestSuite) TestConsensusStateValidateBasic() {
 
 		{
 			"root is nil",
-			&ibcgptypes.ConsensusState{
+			&types.ConsensusState{
 				Timestamp: consensusState.Timestamp,
 				Root:      []byte{},
 			},
@@ -31,7 +31,7 @@ func (suite *GrandpaTestSuite) TestConsensusStateValidateBasic() {
 
 		{
 			"timestamp is zero",
-			&ibcgptypes.ConsensusState{
+			&types.ConsensusState{
 				Timestamp: time.Time{},
 				Root:      consensusState.Root,
 			},

@@ -17,10 +17,13 @@ import (
 	"github.com/octopus-network/beefy-go/beefy"
 )
 
-// step1: verify signature
-// step2: verify mmr
-// step3: verfiy header
-// step4: update client state and consensuse state
+// CheckHeaderAndUpdateState checks if the provided header is valid, and if valid it will:
+// create the consensus state for the header.Height
+// This includes the following four steps
+// Step1: verify mmr signature
+// Step2: verify mmr
+// Step3: verfiy header
+// Step4: update client state and consensuse state
 func (cs ClientState) CheckHeaderAndUpdateState(
 	ctx sdk.Context, cdc codec.BinaryCodec, clientStore sdk.KVStore,
 	header exported.Header,
@@ -190,7 +193,7 @@ func (cs ClientState) VerifySignatures(bsc beefy.SignedCommitment, SignatureProo
 	return nil
 }
 
-// verify batch mmr proof
+// verify mmr batch proof
 func (cs ClientState) VerifyMMR(mmrRoot []byte, mmrSize uint64,
 	beefyMMRLeaves []gsrpctypes.MMRLeaf, mmrBatchProof beefy.MMRBatchProof) error {
 
@@ -203,7 +206,7 @@ func (cs ClientState) VerifyMMR(mmrRoot []byte, mmrSize uint64,
 	return nil
 }
 
-// verify solochain header or parachain header
+// verify subchain header or parachain header
 func (cs ClientState) VerifyHeader(gpHeader Header, mmrRoot []byte, mmrSize uint64) error {
 
 	switch cs.ChainType {
@@ -316,7 +319,7 @@ func (cs ClientState) UpdateClientState(ctx sdk.Context, commitment Commitment, 
 
 }
 
-// Save all the consensue state at height,but just return latest block header
+// Save all the consensue state at height,sort and return latest consensue state
 func (cs ClientState) UpdateConsensusStates(ctx sdk.Context, cdc codec.BinaryCodec, clientStore sdk.KVStore, header *Header) (*ConsensusState, error) {
 
 	var newConsensueState *ConsensusState

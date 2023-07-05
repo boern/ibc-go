@@ -8,14 +8,12 @@ import (
 )
 
 func (suite *GrandpaTestSuite) TestGetHeight() {
-	// header := suite.chainA.LastHeader
 	height := gpHeader.GetHeight()
 	suite.Suite.T().Logf("gpHeader.GetHeight(): %+v", gpHeader.GetHeight())
 	suite.Require().NotEqual(uint64(0), height)
 }
 
 func (suite *GrandpaTestSuite) TestGetTime() {
-	// header := suite.chainA.LastHeader
 	headerTime := gpHeader.GetTime()
 	suite.Suite.T().Logf("gpHeader.GetTime(): %+v", headerTime)
 	suite.Require().NotEqual(time.Time{}, headerTime)
